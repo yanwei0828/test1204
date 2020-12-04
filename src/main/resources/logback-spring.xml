@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<!-- 文件输出格式 -->
+	<property name="PATTERN"
+		value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) [%-4level] [%instanceid] [userId:%X{user}] [%thread] %c [%L] -| %msg%n" />
+	<!--文件路径 -->
+	<property name="FILE_PATH" value="logs/" />
+
+	<logger name="com.yonyou" level="debug" />
+	<logger name="org.springframework.web" level="info" />
+	<logger name="org.ibatis" level="DEBUG" />
+	<logger name="druid.sql" level="DEBUG" />
+	<logger name="org.springframework.jdbc" level="DEBUG" />
+	<logger name="com.gtmc.carapp.service.workorder" level="DEBUG" />
+	
+	<conversionRule conversionWord="instanceid"
+                    converterClass="com.gtmc.carapp.service.workorder.converter.InstanceIdConverter" />
+
+	<!-- 控制台打印 -->
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+		<!-- <encoder>
+			<pattern>${PATTERN}</pattern>
+		</encoder> -->
+	</appender>
+	<!-- 每天产生一个文件，注意正式IDC区的PAAS平台的空间只有10G空间，二种文件不能超过9G空间，超过要进行删除（警告日志不用输出） -->
+	<appender name="ALLFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- 文件路径 -->
+		<file>${FILE_PATH}/logs.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- 文件名称 -->
+			<fileNamePattern>${FILE_PATH}/logs.%d{yyyy-MM-dd}-%i.log
+			</fileNamePattern>
+			<maxFileSize>100MB</maxFileSize>
+			<maxHistory>10</maxHistory>
+			<totalSizeCap>8GB</totalSizeCap>
+		</rollingPolicy>
+		<!-- <layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>${PATTERN}</pattern>
+		</layout> -->
+		<!-- encoder负责两件事，一是把日志信息转换成字节数组，二是把字节数组写入到输出流。 -->
+		<encoder>
+            <pattern>${PATTERN}</pattern>
+            <!-- 设置缓存进行输出 -->
+            <!--<immediateFlush>false</immediateFlush>-->
+        </encoder>
+	</appender>
+	<appender name="ERRORFILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- 文件路径 -->
+		<file>${FILE_PATH}/logs_error.log</file>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- 文件名称 -->
+			<fileNamePattern>${FILE_PATH}/logs_error.%d{yyyy-MM-dd}-%i.log
+			</fileNamePattern>
+			<maxFileSize>10MB</maxFileSize>
+			<maxHistory>100</maxHistory>
+			<totalSizeCap>1GB</totalSizeCap>
+		</rollingPolicy>
+		<append>true</append>
+		<!-- <layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>${PATTERN}</pattern>
+		</layout> -->
+		<!-- encoder负责两件事，一是把日志信息转换成字节数组，二是把字节数组写入到输出流。 -->
+		<encoder>
+            <pattern>${PATTERN}</pattern>
+            <!-- 设置缓存进行输出 -->
+            <immediateFlush>false</immediateFlush>
+        </encoder>
+		<!-- 此日志文件只记录error级别的 -->
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+	
+	<!--配置异步日志-->
+	<!--<appender name="FILE_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+		&lt;!&ndash; 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 &ndash;&gt;
+		<discardingThreshold >0</discardingThreshold>
+		&lt;!&ndash; 更改默认的队列的深度,该值会影响性能.默认值为256 &ndash;&gt;
+		<queueSize>2048</queueSize>
+		<includeCallerData>true</includeCallerData>
+		<appender-ref ref="ALLFILE"/>
+	</appender>-->
+	<appender name="FILEERROR_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+		<!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+		<discardingThreshold >0</discardingThreshold>
+		<!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+		<queueSize>2048</queueSize>
+		<includeCallerData>true</includeCallerData>
+		<appender-ref ref="ERRORFILE"/>
+	</appender>
+	
+	<root level="INFO">
+		<appender-ref ref="ALLFILE" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="ERRORFILE" />
+		<!-- <appender-ref ref="WARNFILE" /> -->
+	</root>
+
+
+	<jmxConfigurator />
+</configuration>

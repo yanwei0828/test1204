@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gtmc.carapp.service.workorder.mapper.TtEsignConstructionOrderMapper">
+    <resultMap id="BaseResultMap" type="com.gtmc.carapp.service.workorder.entity.TtEsignConstructionOrder">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="srv_order_no" jdbcType="VARCHAR" property="srvOrderNo" />
+        <result column="unsign_file_url" jdbcType="VARCHAR" property="unsignFileUrl" />
+        <result column="signed_file_url" jdbcType="VARCHAR" property="signedFileUrl" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="delete_flag" jdbcType="INTEGER" property="deleteFlag" />
+        <result column="sign_date" jdbcType="TIMESTAMP" property="signDate" />
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+		<result column="willing_to_agree" jdbcType="INTEGER" property="willingToAgree" />
+		<result column="will_user" jdbcType="INTEGER" property="willUser" />
+		<result column="will_date" jdbcType="TIMESTAMP" property="willDate" />
+    </resultMap>
+
+    <insert id="addConstructionOrder" parameterType="com.gtmc.carapp.service.workorder.entity.TtEsignConstructionOrder" useGeneratedKeys="true" keyProperty="id">
+    	insert into tt_esign_construction_order(
+    		srv_order_no,
+    		unsign_file_url,
+    		signed_file_url,
+    		status,
+    		delete_flag,
+    		sign_date,
+    		create_date
+    	)
+    	values(
+    		#{srvOrderNo , jdbcType = VARCHAR},
+    		#{unsignFileUrl , jdbcType = VARCHAR},
+    		#{signedFileUrl , jdbcType = VARCHAR},
+    		#{status , jdbcType = INTEGER},
+    		#{deleteFlag , jdbcType = INTEGER},
+    		#{signDate , jdbcType = TIMESTAMP},
+    		sysdate()
+    	)
+    </insert>
+
+	<update id="updateConstructionOrder" parameterType="com.gtmc.carapp.service.workorder.entity.TtEsignConstructionOrder">
+		update tt_esign_construction_order
+		<set>
+			<if test="unsignFileUrl != null and unsignFileUrl != ''">
+				unsign_file_url = #{unsignFileUrl , jdbcType = VARCHAR},
+			</if>
+			<if test="signedFileUrl != null and signedFileUrl != ''">
+				signed_file_url = #{signedFileUrl , jdbcType = VARCHAR},
+			</if>
+			<if test="status != null and status != ''">
+				status = #{status , jdbcType = INTEGER},
+			</if>
+			<if test="deleteFlag != null and deleteFlag != ''">
+				delete_flag = #{deleteFlag , jdbcType = INTEGER},
+			</if>
+			<if test="signDate != null">
+				sign_date = #{signDate , jdbcType = TIMESTAMP},
+			</if>
+			<if test="willingToAgree != null and willingToAgree != ''">
+				willing_to_agree = #{willingToAgree , jdbcType = INTEGER},
+			</if>
+			<if test="willUser != null and willUser != ''">
+				will_user = #{willUser , jdbcType = INTEGER},
+			</if>
+			<if test="willDate != null">
+				will_date = #{willDate , jdbcType = TIMESTAMP},
+			</if>
+			update_date = #{updateDate , jdbcType = TIMESTAMP}
+		</set>
+		where id = #{id , jdbcType = BIGINT}
+	</update>
+
+    <select id="queryConstructionOrder" resultMap="BaseResultMap">
+    	select
+    	   	id,
+    	   	srv_order_no,
+    		unsign_file_url,
+    		signed_file_url,
+    		status,
+    		delete_flag,
+    		sign_date,
+    		create_date,
+    		update_date
+    	from tt_esign_construction_order
+    	where 1=1
+    	<if test="srvOrderNo != null and srvOrderNo != ''">
+            and srv_order_no = #{srvOrderNo , jdbcType = VARCHAR}
+        </if>
+    	<if test="status != null and status != ''">
+            and status = #{status , jdbcType = INTEGER}
+        </if>
+    	<if test="deleteFlag != null and deleteFlag != ''">
+            and delete_flag = #{deleteFlag , jdbcType = INTEGER}
+        </if>
+
+    </select>
+
+	<select id="selectSigned" resultMap="BaseResultMap">
+		select
+		id,
+		srv_order_no,
+		unsign_file_url,
+		signed_file_url,
+		status,
+		delete_flag,
+		sign_date,
+		create_date,
+		update_date
+		from tt_esign_construction_order
+		where 1=1
+		<if test="orderNumber != null and orderNumber != ''">
+			and srv_order_no = #{orderNumber , jdbcType = VARCHAR}
+		</if>
+		and status = 2
+		and delete_flag = 1
+	</select>
+
+	 <select id="getModelName" resultType="java.lang.String" parameterType="java.lang.String">
+        SELECT modelName from tt_spray_model WHERE carmodel=#{carmodel}
+    </select>
+    <insert id="saveAuthorizedServices">
+    	insert INTO tt_esign_account (phone,user_id,create_date) VALUES
+		(#{phone},#{userId},NOW())
+    </insert>
+    <select id="queryAuthorizedServices" resultType="map">
+		select * from tt_esign_account
+		where 1=1
+		and phone=#{phone}
+		and user_id=#{userId}
+    </select>
+    <update id="updateAuthorizedServices">
+	    UPDATE tt_esign_account set update_date=NOW()
+		where phone=#{phone}
+		and user_id=#{userId}
+    </update>
+    <update id="saveWillingnessToSign">
+    	update tt_esign_construction_order
+		set willing_to_agree=1,will_date=NOW(),will_user=#{userId}
+		where id =#{id}
+    </update>
+</mapper>

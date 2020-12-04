@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gtmc.carapp.service.workorder.mapper.TtEsignConstructionOrderDetailMapper">
+    <resultMap id="BaseResultMap" type="com.gtmc.carapp.service.workorder.entity.TtEsignConstructionOrderDetail">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <result column="construction_order_id" jdbcType="BIGINT" property="constructionOrderId" />
+        <result column="sa_name" jdbcType="VARCHAR" property="saName" />
+        <result column="srv_type_name" jdbcType="VARCHAR" property="srvTypeName" />
+        <result column="srv_order_no" jdbcType="VARCHAR" property="srvOrderNo" />
+        <result column="customer_type" jdbcType="VARCHAR" property="customerType" />
+        <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
+        <result column="customer_phone" jdbcType="VARCHAR" property="customerPhone" />
+        <result column="customer_address" jdbcType="VARCHAR" property="customerAddress" />
+        <result column="regist_no" jdbcType="VARCHAR" property="registNo" />
+        <result column="vin" jdbcType="VARCHAR" property="vin" />
+        <result column="car_model_name" jdbcType="VARCHAR" property="carModelName" />
+        <result column="twc_user_name" jdbcType="VARCHAR" property="twcUserName" />
+        <result column="twc_tel1" jdbcType="VARCHAR" property="twcTel1" />
+        <result column="twc_tel2" jdbcType="VARCHAR" property="twcTel2" />
+        <result column="buy_car_date" jdbcType="TIMESTAMP" property="buyCarDate" />
+        <result column="insurecomcode" jdbcType="VARCHAR" property="insurecomcode" />
+        <result column="effective_date_start" jdbcType="TIMESTAMP" property="effectiveDateStart" />
+        <result column="effective_date_end" jdbcType="TIMESTAMP" property="effectiveDateEnd" />
+        <result column="latest_srv_date" jdbcType="TIMESTAMP" property="latestSrvDate" />
+        <result column="latest_srv_type_name" jdbcType="VARCHAR" property="latestSrvTypeName" />
+        <result column="latest_mileage" jdbcType="VARCHAR" property="latestMileage" />
+        <result column="twc_result" jdbcType="VARCHAR" property="twcResult" />
+        <result column="project_total_amount" jdbcType="VARCHAR" property="projectTotalAmount" />
+        <result column="project_discount_amount" jdbcType="VARCHAR" property="projectDiscountAmount" />
+        <result column="warranty_cost" jdbcType="VARCHAR" property="warrantyCost" />
+        <result column="project_cost" jdbcType="VARCHAR" property="projectCost" />
+        <result column="projects_list" jdbcType="LONGVARCHAR" property="projectsList" />
+        <result column="parts_total_amount" jdbcType="VARCHAR" property="partsTotalAmount" />
+        <result column="part_discount_amount" jdbcType="VARCHAR" property="partDiscountAmount" />
+        <result column="warranty_part" jdbcType="VARCHAR" property="warrantyPart" />
+        <result column="parts_cost " jdbcType="VARCHAR" property="partsCost" />
+        <result column="parts_list" jdbcType="LONGVARCHAR" property="partsList" />
+        <result column="order_price" jdbcType="VARCHAR" property="orderPrice" />
+        <result column="prercv_amount" jdbcType="VARCHAR" property="prercvAmount" />
+        <result column="other_discount" jdbcType="VARCHAR" property="otherDiscount" />
+        <result column="total_price" jdbcType="VARCHAR" property="totalPrice" />
+        <result column="sa_phone" jdbcType="VARCHAR" property="saPhone" />
+        <result column="detail_address" jdbcType="VARCHAR" property="detailAddress" />
+        <result column="appointment_tel_no" jdbcType="VARCHAR" property="appointmentTelNo" />
+        <result column="sales_tel_no" jdbcType="VARCHAR" property="salesTelNo" />
+        <result column="all_day_rescue_tel_no" jdbcType="VARCHAR" property="allDayRescueTelNo" />
+        <result column="svcin_name" jdbcType="VARCHAR" property="svcinName" />
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    </resultMap>
+
+
+
+</mapper>

@@ -1,0 +1,12 @@
+FROM 172.23.0.14/public/java:openjdk-8u111
+
+COPY target/service-workorder.jar /usr/src/myapp/service-workorder.jar
+
+ADD agent/tingyun-agent-java-2.6.1.tar.gz /opt/agent/
+
+WORKDIR /usr/src/myapp/
+
+EXPOSE 9026
+
+ENTRYPOINT java -javaagent:/opt/agent/tingyun/tingyun-agent-java.jar -Dtingyun.config.nbs.app_name=service-workorder -jar service-workorder.jar
+

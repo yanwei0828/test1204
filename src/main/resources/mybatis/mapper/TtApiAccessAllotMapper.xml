@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gtmc.carapp.service.workorder.mapper.TtApiAccessAllotMapper" >
+  <resultMap id="BaseResultMap" type="com.gtmc.carapp.service.workorder.entity.TtApiAccessAllot" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="APP_ID" property="appId" jdbcType="INTEGER" />
+    <result column="APP_KEY" property="appKey" jdbcType="VARCHAR" />
+    <result column="USE_SCOPE" property="useScope" jdbcType="VARCHAR" />
+    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+    <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+</mapper>

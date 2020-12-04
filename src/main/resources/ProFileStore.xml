@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FileServer>
+
+	<!-- 生产环境 ftp协议-->
+	<NameNode id="nd01" domain="https://carappvideo.gtmc.com.cn" enable="true">
+		<DataNode id="fs01" protocol="ftp" role="WRD">
+			<User>IFImageUser</User>
+			<Password>1qazxsw@</Password>
+			<HostIp>172.16.199.196</HostIp>
+			<Port>21</Port>
+			<!-- FTP模式配置 port（主动模式）/ pasv（被动模式）默认主动模式 -->
+			<Pattern>pasv</Pattern>
+			<FileRoot>/</FileRoot>
+		</DataNode>
+	</NameNode>
+	
+	<!-- 生产环境 -->
+	<NameNode id="nd01" domain="https://carapp.gtmc.com.cn" enable="false">
+			<DataNode id="fs01" protocol="smb" role="WRD">
+				<User>IFImageUser</User>
+				<Password>1qazxsw@</Password>
+				<HostIp>172.16.199.50</HostIp>
+				<FileRoot>/APPFile</FileRoot>
+			</DataNode>
+	</NameNode>
+	
+	
+	<NameNode id="nd01" domain="https://carappvideo.gtmc.com.cn" enable="false">
+	   <DataNode id="fs01" protocol="smb" role="WRD">
+	    <User>IFImageUser</User>
+	    <Password>1qazxsw@</Password>
+	    <HostIp>172.16.199.196</HostIp>
+	    <FileRoot>/APPFile</FileRoot>
+	   </DataNode>
+	 </NameNode>
+</FileServer>

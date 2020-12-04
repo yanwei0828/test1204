@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FileServer>
+
+<!-- 测试环境 ftp协议-->
+	<NameNode id="nd01" domain="https://carapptest.gtmc.com.cn" enable="true">
+		<DataNode id="fs01" protocol="ftp" role="WRD">
+			<User>IFImageUser</User>
+			<Password>1qazxsw@</Password>
+			<HostIp>172.16.199.47</HostIp>
+			<Port>21</Port>
+			<!-- FTP模式配置 port（主动模式）/ pasv（被动模式）默认主动模式 -->
+			<Pattern>pasv</Pattern>
+			<FileRoot>/</FileRoot>
+		</DataNode>
+	</NameNode>
+	
+<!-- 测试环境 -->
+	<NameNode id="nd01" domain="https://carapptest.gtmc.com.cn" enable="false">
+		<DataNode id="fs01" protocol="smb" role="WRD">
+			<User>IFImageUser</User>
+			<Password>1qazxsw@</Password>
+			<HostIp>172.16.199.47</HostIp>
+			<FileRoot>/CarAPP Samba</FileRoot>
+		</DataNode>
+	</NameNode>
+
+
+	
+	<NameNode id="nd01" domain="http://10.180.8.164" enable="false">
+		<DataNode id="fs01" protocol="local" role="WRD">
+			<FileRoot>/home/cmy/file/</FileRoot>
+		</DataNode>
+	</NameNode>
+	
+</FileServer>

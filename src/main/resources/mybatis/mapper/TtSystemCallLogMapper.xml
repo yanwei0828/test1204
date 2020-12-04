@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gtmc.carapp.service.workorder.mapper.TtSystemCallLogMapper" >
+  <resultMap id="BaseResultMap" type="com.gtmc.carapp.service.workorder.entity.TtSystemCallLog" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="call_url" property="callUrl" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="sync_param" property="syncParam" jdbcType="VARCHAR" />
+    <result column="response_result" property="responseResult" jdbcType="VARCHAR" />
+    <result column="call_status" property="callStatus" jdbcType="INTEGER" />
+  </resultMap>
+  
+  
+  
+</mapper>
